@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - dookisbad.com</title>
+  <meta name="description" content="Why does dookisbad.com exist? Because Duke is bad. It's that simple.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="assets/dookisbad.png">
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html">
+        <img src="assets/dookisbad.png" alt="dookisbad.com logo" class="nav-logo">
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="losses.html">Losses</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ABOUT CONTENT -->
+  <section class="page-content">
+    <h1>Why Does This Exist?</h1>
+
+    <p>
+      We made this website for one reason and one reason only: to <span class="highlight">spread awareness about how Duke is bad</span>.
+    </p>
+
+    <p>
+      That's it. That's the whole mission statement. No hidden agenda, no ulterior motive. Just the simple, undeniable truth that Duke basketball, despite all the hype, the ESPN favoritism, and the one-and-done recruits, is and always has been... bad.
+    </p>
+
+    <p>
+      From the flops to the floor slaps, from the Cameron Crazies to Coach K's legendary sideline tantrums &mdash; this site exists as a permanent, public record that <span class="highlight">not everyone was fooled</span>.
+    </p>
+
+    <p>
+      Whether you're a proud Tar Heel, a Wolfpack loyalist, a Maryland fan who still remembers the ACC days, or just someone who watched Duke get bounced by a 15-seed and thought "yeah, that tracks" &mdash; this site is for you.
+    </p>
+
+    <h1 class="mt-3">FAQ</h1>
+
+    <p>
+      <strong>Q: Is Duke actually bad?</strong><br>
+      A: Yes.
+    </p>
+
+    <p>
+      <strong>Q: But they've won five national championships?</strong><br>
+      A: Doesn't matter. Still bad.
+    </p>
+
+    <p>
+      <strong>Q: Is this a parody?</strong><br>
+      A: This is a public service.
+    </p>
+
+    <p>
+      <strong>Q: Are you affiliated with Duke University?</strong><br>
+      A: Absolutely not. Thank god.
+    </p>
+
+    <p>
+      <strong>Q: Can I contribute?</strong><br>
+      A: If you have documented evidence of Duke being bad, we're all ears.
+    </p>
+
+    <div class="rat-container">
+      <img src="assets/coachk_rat.jpeg" alt="Coach K in his natural form" class="rat-img" style="max-width: 250px;">
+      <p class="rat-caption">The man himself</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; <span id="year"></span> dookisbad.com &mdash; Not affiliated with Duke University (thank god)</p>
+    <p class="mt-1"><a href="index.html">Back to the evidence</a></p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

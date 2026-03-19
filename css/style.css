@@ -1,0 +1,579 @@
+/* ============================================
+   DOOKISBAD.COM - Because Duke Is Bad
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --duke-blue: #003087;
+  --anti-duke-red: #cc0000;
+  --bg-dark: #0a0a0a;
+  --bg-card: #141414;
+  --text-primary: #f0f0f0;
+  --text-secondary: #a0a0a0;
+  --accent: #ff4444;
+  --accent-glow: rgba(255, 68, 68, 0.3);
+  --border: #2a2a2a;
+  --winning-green: #22c55e;
+  --losing-red: #ef4444;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Space Mono', monospace;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ---- NAVIGATION ---- */
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--accent);
+  padding: 0 2rem;
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.nav-logo {
+  height: 48px;
+  transition: transform 0.2s;
+}
+
+.nav-logo:hover {
+  transform: rotate(-3deg) scale(1.05);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 0.25rem;
+}
+
+.nav-links a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* ---- HERO / HEADER ---- */
+
+.hero {
+  text-align: center;
+  padding: 3rem 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-logo {
+  max-width: 420px;
+  width: 100%;
+  margin-bottom: 1rem;
+  animation: floatIn 0.8s ease-out;
+}
+
+.hero h1 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 0.5rem;
+}
+
+.hero .subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+@keyframes floatIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- SCORE TICKER ---- */
+
+.score-ticker {
+  background: linear-gradient(135deg, #111, #1a1a1a);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.score-ticker h2 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.score-ticker .matchup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.score-ticker .team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100px;
+}
+
+.score-ticker .team-name {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.score-ticker .team-name.duke {
+  color: var(--duke-blue);
+  text-decoration: line-through;
+  text-decoration-color: var(--accent);
+}
+
+.score-ticker .team-score {
+  font-size: 2.5rem;
+  font-family: 'Archivo Black', sans-serif;
+  line-height: 1;
+  margin-top: 0.25rem;
+}
+
+.score-ticker .vs {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.score-ticker .game-status {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.score-ticker .game-status.live {
+  color: var(--losing-red);
+  animation: pulse 1.5s infinite;
+}
+
+.score-ticker .no-game {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  padding: 1rem 0;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ---- COACH K MOMENTS SECTION ---- */
+
+.moments-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.moments-section h2 {
+  font-family: 'Archivo Black', sans-serif;
+  text-align: center;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  color: var(--accent);
+}
+
+.moments-section .section-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+.moment-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s, transform 0.2s;
+  cursor: default;
+}
+
+.moment-card:hover {
+  border-color: var(--accent);
+  transform: translateX(4px);
+}
+
+.moment-card .moment-year {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.7rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.4rem;
+}
+
+.moment-card .moment-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.moment-card .moment-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.shuffle-btn {
+  display: block;
+  margin: 2rem auto 0;
+  padding: 0.75rem 2rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.shuffle-btn:hover {
+  background: #e03030;
+}
+
+.shuffle-btn:active {
+  transform: scale(0.97);
+}
+
+/* ---- RAT IMAGE ---- */
+
+.rat-container {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.rat-img {
+  max-width: 350px;
+  width: 100%;
+  border-radius: 12px;
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 30px var(--accent-glow);
+  transition: transform 0.3s;
+}
+
+.rat-img:hover {
+  transform: rotate(2deg) scale(1.02);
+}
+
+.rat-caption {
+  margin-top: 0.75rem;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+/* ---- PAGE CONTENT (ABOUT / LOSSES) ---- */
+
+.page-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+.page-content h1 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.page-content p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page-content .highlight {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ---- LOSSES TABLE ---- */
+
+.losses-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.losses-controls input,
+.losses-controls select {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+}
+
+.losses-controls input::placeholder {
+  color: var(--text-secondary);
+}
+
+.losses-controls input:focus,
+.losses-controls select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.loss-counter {
+  text-align: center;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.2rem;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+
+.loss-counter span {
+  font-size: 2.5rem;
+  display: block;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.losses-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.losses-table thead {
+  background: var(--bg-card);
+  position: sticky;
+  top: 0;
+}
+
+.losses-table th {
+  font-family: 'Archivo Black', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.7rem;
+  color: var(--accent);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 2px solid var(--accent);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.losses-table th:hover {
+  color: #fff;
+}
+
+.losses-table th .sort-arrow {
+  margin-left: 0.3rem;
+  font-size: 0.6rem;
+}
+
+.losses-table td {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.losses-table tbody tr {
+  transition: background 0.15s;
+}
+
+.losses-table tbody tr:hover {
+  background: rgba(255, 68, 68, 0.05);
+}
+
+.losses-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.losses-table tbody tr:nth-child(even):hover {
+  background: rgba(255, 68, 68, 0.05);
+}
+
+.losses-table .upset {
+  color: var(--winning-green);
+  font-weight: 700;
+}
+
+/* ---- FOOTER ---- */
+
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* ---- RESPONSIVE ---- */
+
+@media (max-width: 640px) {
+  nav {
+    padding: 0 1rem;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: rgba(10, 10, 10, 0.97);
+    border-bottom: 2px solid var(--accent);
+    padding: 1rem;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 0.75rem 1rem;
+    text-align: center;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .hero-logo {
+    max-width: 280px;
+  }
+
+  .score-ticker .matchup {
+    gap: 1rem;
+  }
+
+  .score-ticker .team-score {
+    font-size: 2rem;
+  }
+
+  .moment-card {
+    padding: 1.25rem;
+  }
+
+  .losses-table {
+    font-size: 0.7rem;
+  }
+
+  .losses-table th,
+  .losses-table td {
+    padding: 0.5rem 0.6rem;
+  }
+}
+
+/* ---- MISC UTILITIES ---- */
+
+.text-center { text-align: center; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 2rem; }
+.mb-2 { margin-bottom: 1rem; }
+
+/* Easter egg: Konami code activated */
+.party-mode {
+  animation: partyBg 0.5s infinite;
+}
+
+@keyframes partyBg {
+  0% { background-color: #cc0000; }
+  25% { background-color: #003087; }
+  50% { background-color: #0a0a0a; }
+  75% { background-color: #cc0000; }
+  100% { background-color: #0a0a0a; }
+}

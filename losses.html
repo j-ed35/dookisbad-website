@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Every Duke Loss - dookisbad.com</title>
+  <meta name="description" content="A comprehensive record of every Duke basketball loss under Coach K. You're welcome.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="assets/dookisbad.png">
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html">
+        <img src="assets/dookisbad.png" alt="dookisbad.com logo" class="nav-logo">
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="losses.html" class="active">Losses</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- LOSSES CONTENT -->
+  <section class="page-content">
+    <h1>The Duke Loss Archive</h1>
+    <p class="text-center">Every single Duke loss under Coach K (1980&ndash;2022). Forty-two years of documented failure. You're welcome.</p>
+
+    <div class="loss-counter">
+      Total Losses Under Coach K
+      <span id="lossCount">---</span>
+    </div>
+
+    <div class="losses-controls">
+      <input type="text" id="searchInput" placeholder="Search opponent, year..." oninput="filterLosses()">
+      <select id="seasonFilter" onchange="filterLosses()">
+        <option value="">All Seasons</option>
+      </select>
+      <select id="typeFilter" onchange="filterLosses()">
+        <option value="">All Games</option>
+        <option value="ncaa">NCAA Tournament</option>
+        <option value="acc">ACC Games</option>
+        <option value="non-conf">Non-Conference</option>
+      </select>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="losses-table" id="lossesTable">
+        <thead>
+          <tr>
+            <th onclick="sortTable(0)">Date <span class="sort-arrow"></span></th>
+            <th onclick="sortTable(1)">Season <span class="sort-arrow"></span></th>
+            <th onclick="sortTable(2)">Opponent <span class="sort-arrow"></span></th>
+            <th onclick="sortTable(3)">Score <span class="sort-arrow"></span></th>
+            <th onclick="sortTable(4)">Type <span class="sort-arrow"></span></th>
+            <th onclick="sortTable(5)">Notes <span class="sort-arrow"></span></th>
+          </tr>
+        </thead>
+        <tbody id="lossesBody">
+        </tbody>
+      </table>
+    </div>
+
+    <p class="text-center mt-3" style="font-size: 0.75rem;">
+      Data compiled by hand with love and dedication to the cause.<br>
+      If you find a missing loss, please let us know. Every one counts.
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; <span id="year"></span> dookisbad.com &mdash; Not affiliated with Duke University (thank god)</p>
+    <p class="mt-1"><a href="index.html">Back home</a></p>
+  </footer>
+
+  <script src="js/losses-data.js"></script>
+  <script src="js/losses.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
