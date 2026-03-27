@@ -182,6 +182,11 @@ nav {
   color: var(--text-primary);
 }
 
+.moment-card:visited,
+.moment-card:link {
+  color: var(--text-primary);
+}
+
 .moment-card:hover {
   border-color: var(--accent);
   transform: translateX(4px);
