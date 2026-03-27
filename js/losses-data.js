@@ -1,5 +1,5 @@
 /* ============================================
-   DUKE LOSSES UNDER COACH K (1980-2022)
+   DUKE LOSSES UNDER darth k (1980-2022)
    AND JON SCHEYER (2022-present)
    Every. Single. One. (Notable selections)
 
@@ -8,7 +8,7 @@
    ============================================ */
 
 const DUKE_LOSSES = [
-  // 1980-81 (Coach K's first season - 17-13)
+  // 1980-81 (darth k's first season - 17-13)
   ["1980-11-29", "1980-81", "Vanderbilt", "L 57-66", "non-conf", ""],
   ["1981-01-10", "1980-81", "Virginia", "L 57-78", "acc", "Ralph Sampson game"],
   ["1981-01-14", "1980-81", "North Carolina", "L 56-74", "acc", ""],
@@ -133,7 +133,7 @@ const DUKE_LOSSES = [
   ["1994-03-13", "1993-94", "Virginia", "L 64-69", "acc", "ACC Tournament"],
   ["1994-03-27", "1993-94", "Purdue", "L 69-75", "ncaa", "NCAA Tournament loss"],
 
-  // 1994-95 (13-18 - Coach K's "back injury" year)
+  // 1994-95 (13-18 - darth k's "back injury" year)
   ["1995-01-04", "1994-95", "Virginia", "L 63-85", "acc", "K was 'injured'"],
   ["1995-01-07", "1994-95", "Clemson", "L 52-75", "acc", "23-point loss"],
   ["1995-01-11", "1994-95", "North Carolina", "L 60-102", "acc", "42-POINT LOSS TO UNC"],
@@ -364,7 +364,7 @@ const DUKE_LOSSES = [
   ["2021-02-15", "2020-21", "Notre Dame", "L 75-93", "acc", ""],
   ["2021-03-10", "2020-21", "Louisville", "L 70-86", "acc", "ACC Tournament"],
 
-  // 2021-22 (32-7, Coach K's final season)
+  // 2021-22 (32-7, darth k's final season)
   ["2022-01-04", "2021-22", "Miami", "L 74-76", "acc", ""],
   ["2022-01-22", "2021-22", "Louisville", "L 64-74", "acc", ""],
   ["2022-02-07", "2021-22", "Virginia", "L 57-69", "acc", ""],

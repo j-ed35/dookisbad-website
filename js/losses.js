@@ -6,7 +6,7 @@
 const SCHEYER_SEASONS = ['2022-23', '2023-24', '2024-25', '2025-26', '2026-27', '2027-28'];
 
 function getCoach(season) {
-  return SCHEYER_SEASONS.includes(season) ? 'Scheyer' : 'Coach K';
+  return SCHEYER_SEASONS.includes(season) ? 'Scheyer' : 'darth k';
 }
 
 let currentSort = { col: 0, asc: false }; // Default: newest first
