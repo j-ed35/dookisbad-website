@@ -105,6 +105,7 @@ nav {
   position: relative;
   text-align: center;
   padding: 5rem 1.5rem 4rem;
+  background: #0a0a0a;
   border-bottom: 1px solid var(--border);
   overflow: hidden;
 }
@@ -114,7 +115,7 @@ nav {
   position: absolute;
   inset: 0;
   background: url('../assets/coachk_rat.jpeg') center center / cover no-repeat;
-  opacity: 0.12;
+  opacity: 0.08;
   z-index: 0;
 }
 
@@ -128,6 +129,10 @@ nav {
   width: 100%;
   margin-bottom: 1rem;
   animation: floatIn 0.8s ease-out;
+  filter: drop-shadow(0 0 30px rgba(26, 115, 232, 0.8))
+         drop-shadow(0 0 60px rgba(26, 115, 232, 0.6))
+         drop-shadow(0 0 100px rgba(26, 115, 232, 0.4))
+         drop-shadow(0 0 160px rgba(26, 115, 232, 0.25));
 }
 
 .hero h1 {
@@ -140,7 +145,7 @@ nav {
 }
 
 .hero .subtitle {
-  color: var(--text-secondary);
+  color: #cccccc;
   font-size: 0.95rem;
   max-width: 500px;
   margin: 0 auto;
