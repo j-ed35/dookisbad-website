@@ -1,5 +1,6 @@
 /* ============================================
    DUKE LOSSES UNDER COACH K (1980-2022)
+   AND JON SCHEYER (2022-present)
    Every. Single. One. (Notable selections)
 
    Format: [date, season, opponent, score, type, notes]
@@ -371,4 +372,36 @@ const DUKE_LOSSES = [
   ["2022-03-05", "2021-22", "North Carolina", "L 82-94", "acc", "K'S LAST HOME GAME - UNC RUINED IT"],
   ["2022-03-11", "2021-22", "Virginia Tech", "L 76-82", "acc", "ACC Tournament"],
   ["2022-04-02", "2021-22", "North Carolina", "L 77-81", "ncaa", "FINAL FOUR - K'S LAST GAME EVER - UNC WINS"],
+
+  // ============================================
+  // JON SCHEYER ERA (2022-present)
+  // ============================================
+
+  // 2022-23 (27-9, Scheyer's first season)
+  ["2022-11-15", "2022-23", "Kansas", "L 64-69", "non-conf", "Champions Classic - Scheyer era begins with an L"],
+  ["2022-11-27", "2022-23", "Purdue", "L 56-75", "non-conf", "Phil Knight Legacy Championship - blown out by Zach Edey"],
+  ["2022-12-20", "2022-23", "Wake Forest", "L 70-81", "acc", ""],
+  ["2023-01-04", "2022-23", "NC State", "L 60-84", "acc", "24-point blowout at NC State"],
+  ["2023-01-14", "2022-23", "Clemson", "L 64-72", "acc", ""],
+  ["2023-01-23", "2022-23", "Virginia Tech", "L 75-78", "acc", ""],
+  ["2023-02-06", "2022-23", "Miami", "L 59-81", "acc", "22-point blowout at Miami"],
+  ["2023-02-11", "2022-23", "Virginia", "L 62-69", "acc", "Overtime loss at Virginia"],
+  ["2023-03-18", "2022-23", "Tennessee", "L 52-65", "ncaa", "NCAA Tournament Round of 32 - season over"],
+
+  // 2023-24 (27-9)
+  ["2023-11-10", "2023-24", "Arizona", "L 73-78", "non-conf", "Season opener loss"],
+  ["2023-11-29", "2023-24", "Arkansas", "L 75-80", "non-conf", ""],
+  ["2023-12-02", "2023-24", "Georgia Tech", "L 68-72", "acc", ""],
+  ["2024-01-20", "2023-24", "Pittsburgh", "L 76-80", "acc", ""],
+  ["2024-02-03", "2023-24", "North Carolina", "L 84-93", "acc", ""],
+  ["2024-02-24", "2023-24", "Wake Forest", "L 79-83", "acc", ""],
+  ["2024-03-09", "2023-24", "North Carolina", "L 79-84", "acc", "Regular season finale loss to UNC"],
+  ["2024-03-14", "2023-24", "NC State", "L 69-74", "acc", "ACC Tournament Quarterfinals - upset by 10-seed NC State"],
+  ["2024-03-31", "2023-24", "NC State", "L 64-76", "ncaa", "NCAA Elite Eight - NC State does it AGAIN"],
+
+  // 2024-25 (35-4)
+  ["2024-11-12", "2024-25", "Kentucky", "L 72-77", "non-conf", "Champions Classic"],
+  ["2024-11-26", "2024-25", "Kansas", "L 72-75", "non-conf", "Vegas Showdown"],
+  ["2025-02-08", "2024-25", "Clemson", "L 71-77", "acc", "Snapped 16-game win streak"],
+  ["2025-04-05", "2024-25", "Houston", "L 67-70", "ncaa", "FINAL FOUR - Houston 9-0 run in final 33 seconds - heartbreaker"],
 ];

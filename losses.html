@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Every Duke Loss - dookisbad.com</title>
-  <meta name="description" content="A comprehensive record of every Duke basketball loss under Coach K. You're welcome.">
+  <meta name="description" content="A comprehensive record of every Duke basketball loss under Coach K and Jon Scheyer. You're welcome.">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="assets/dookisbad.png">
 </head>
@@ -29,10 +29,10 @@
   <!-- LOSSES CONTENT -->
   <section class="page-content">
     <h1>The Duke Loss Archive</h1>
-    <p class="text-center">Every single Duke loss under Coach K (1980&ndash;2022). Forty-two years of documented failure. You're welcome.</p>
+    <p class="text-center">Every single Duke loss under Coach K (1980&ndash;2022) and Jon Scheyer (2022&ndash;present). Decades of documented failure. You're welcome.</p>
 
     <div class="loss-counter">
-      Total Losses Under Coach K
+      Total Duke Losses
       <span id="lossCount">---</span>
     </div>
 
@@ -47,6 +47,11 @@
         <option value="acc">ACC Games</option>
         <option value="non-conf">Non-Conference</option>
       </select>
+      <select id="coachFilter" onchange="filterLosses()">
+        <option value="">All Coaches</option>
+        <option value="Coach K">Coach K</option>
+        <option value="Scheyer">Jon Scheyer</option>
+      </select>
     </div>
 
     <div class="table-wrapper">
@@ -55,10 +60,11 @@
           <tr>
             <th onclick="sortTable(0)">Date <span class="sort-arrow"></span></th>
             <th onclick="sortTable(1)">Season <span class="sort-arrow"></span></th>
-            <th onclick="sortTable(2)">Opponent <span class="sort-arrow"></span></th>
-            <th onclick="sortTable(3)">Score <span class="sort-arrow"></span></th>
-            <th onclick="sortTable(4)">Type <span class="sort-arrow"></span></th>
-            <th onclick="sortTable(5)">Notes <span class="sort-arrow"></span></th>
+            <th onclick="sortTable(2)">Coach <span class="sort-arrow"></span></th>
+            <th onclick="sortTable(3)">Opponent <span class="sort-arrow"></span></th>
+            <th onclick="sortTable(4)">Score <span class="sort-arrow"></span></th>
+            <th onclick="sortTable(5)">Type <span class="sort-arrow"></span></th>
+            <th onclick="sortTable(6)">Notes <span class="sort-arrow"></span></th>
           </tr>
         </thead>
         <tbody id="lossesBody">
@@ -74,7 +80,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <p>&copy; <span id="year"></span> dookisbad.com &mdash; Not affiliated with Duke University (thank god)</p>
+    <p>&copy; <span id="year"></span> dookisbad.com &mdash; Not affiliated with Duke University or Profits</p>
     <p class="mt-1"><a href="index.html">Back home</a></p>
   </footer>
 

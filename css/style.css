@@ -73,7 +73,7 @@ nav {
 }
 
 .nav-links a {
-  color: var(--text-primary);
+  color: #ffffff;
   text-decoration: none;
   font-family: 'Oswald', sans-serif;
   font-size: 0.85rem;
@@ -94,7 +94,7 @@ nav {
   display: none;
   background: none;
   border: none;
-  color: var(--text-primary);
+  color: #ffffff;
   font-size: 1.5rem;
   cursor: pointer;
 }
@@ -169,21 +169,17 @@ nav {
   color: var(--accent);
 }
 
-.moments-section .section-subtitle {
-  text-align: center;
-  color: var(--text-secondary);
-  font-size: 0.8rem;
-  margin-bottom: 2rem;
-}
-
 .moment-card {
+  display: block;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 1.5rem 2rem;
   margin-bottom: 1rem;
   transition: border-color 0.2s, transform 0.2s;
-  cursor: default;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text-primary);
 }
 
 .moment-card:hover {
@@ -191,25 +187,9 @@ nav {
   transform: translateX(4px);
 }
 
-.moment-card .moment-year {
-  font-family: 'Oswald', sans-serif;
-  font-size: 0.7rem;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 0.4rem;
-}
-
 .moment-card .moment-title {
   font-family: 'Oswald', sans-serif;
   font-size: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.moment-card .moment-desc {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
 }
 
 .shuffle-btn {
