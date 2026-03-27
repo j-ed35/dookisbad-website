@@ -151,7 +151,7 @@ nav {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ---- COACH K MOMENTS SECTION ---- */
+/* ---- darth k MOMENTS SECTION ---- */
 
 .moments-section {
   max-width: 800px;
@@ -190,6 +190,14 @@ nav {
 .moment-card:hover {
   border-color: var(--accent);
   transform: translateX(4px);
+}
+
+.moment-img {
+  width: 100%;
+  max-height: 160px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
 }
 
 .moment-card .moment-title {
@@ -402,6 +410,14 @@ nav {
 .store-card:hover {
   border-color: var(--accent);
   transform: translateY(-2px);
+}
+
+.store-img {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  border-radius: 6px;
+  margin-bottom: 1rem;
 }
 
 .store-card h3 {
