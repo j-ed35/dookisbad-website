@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Store - dookisbad.com</title>
+  <meta name="description" content="Official dookisbad.com store. We make no profit and guarantee nothing.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="assets/dookisbad.png">
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html">
+        <img src="assets/dookisbad.png" alt="dookisbad.com logo" class="nav-logo">
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="losses.html">Losses</a></li>
+        <li><a href="store.html" class="active">Store</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- STORE CONTENT -->
+  <section class="page-content">
+    <h1>Store</h1>
+
+    <div class="store-disclaimer">
+      Dookisbad.com is a non-profit site and makes 0% profit from the sale of these items. We do not know the sellers, and we cannot guarantee that your merchandise will arrive.
+    </div>
+
+    <div class="store-grid">
+      <div class="store-card">
+        <h3>Duke Tactical Athletic Supporter</h3>
+        <a href="https://flyingcross.com/products/duke-tactical-athletic-supporter" target="_blank" rel="noopener noreferrer" class="shop-btn">Shop Now</a>
+      </div>
+
+      <div class="store-card">
+        <h3>Duke Sucks: A Completely Evenhanded Investigation (Book)</h3>
+        <a href="https://www.amazon.com/Duke-Sucks-Completely-Evenhanded-Investigation-ebook/dp/B005EXSNYI" target="_blank" rel="noopener noreferrer" class="shop-btn">Shop Now</a>
+      </div>
+
+      <div class="store-card">
+        <h3>I Hate Dook UNC Tar Heels T-Shirt</h3>
+        <a href="https://www.beefshirts.com/products/i-hate-dook-unc-tar-heels-t-shirt-text-design" target="_blank" rel="noopener noreferrer" class="shop-btn">Shop Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; <span id="year"></span> dookisbad.com &mdash; Not affiliated with Duke University (thank god)</p>
+    <p class="mt-1"><a href="index.html">Back home</a></p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

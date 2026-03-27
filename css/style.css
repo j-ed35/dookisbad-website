@@ -2,17 +2,17 @@
    DOOKISBAD.COM - Because Duke Is Bad
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
 
 :root {
   --duke-blue: #003087;
-  --anti-duke-red: #cc0000;
-  --bg-dark: #ffffff;
-  --bg-card: #bcbcbc;
+  --anti-duke-blue: #1a73e8;
+  --bg-dark: #e0e0e0;
+  --bg-card: #d0d0d0;
   --text-primary: #000000;
   --text-secondary: #101010;
-  --accent: #ff4444;
-  --accent-glow: rgba(255, 68, 68, 0.3);
+  --accent: #1a73e8;
+  --accent-glow: rgba(26, 115, 232, 0.3);
   --border: #2a2a2a;
   --winning-green: #22c55e;
   --losing-red: #ef4444;
@@ -29,7 +29,7 @@ html {
 }
 
 body {
-  font-family: 'Space Mono', monospace;
+  font-family: 'Oswald', sans-serif;
   background-color: var(--bg-dark);
   color: var(--text-primary);
   min-height: 100vh;
@@ -75,7 +75,7 @@ nav {
 .nav-links a {
   color: var(--text-primary);
   text-decoration: none;
-  font-family: 'Archivo Black', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -102,9 +102,25 @@ nav {
 /* ---- HERO / HEADER ---- */
 
 .hero {
+  position: relative;
   text-align: center;
-  padding: 3rem 1.5rem 2rem;
+  padding: 5rem 1.5rem 4rem;
   border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../assets/coachk_rat.jpeg') center center / cover no-repeat;
+  opacity: 0.12;
+  z-index: 0;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-logo {
@@ -115,7 +131,7 @@ nav {
 }
 
 .hero h1 {
-  font-family: 'Archivo Black', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: clamp(1.8rem, 5vw, 3rem);
   color: var(--accent);
   text-transform: uppercase;
@@ -135,92 +151,6 @@ nav {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ---- SCORE TICKER ---- */
-
-.score-ticker {
-  background: linear-gradient(135deg, #111, #1a1a1a);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  text-align: center;
-}
-
-.score-ticker h2 {
-  font-family: 'Archivo Black', sans-serif;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  color: var(--accent);
-  margin-bottom: 1rem;
-}
-
-.score-ticker .matchup {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  font-size: 1.2rem;
-  font-weight: 700;
-}
-
-.score-ticker .team {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 100px;
-}
-
-.score-ticker .team-name {
-  font-family: 'Archivo Black', sans-serif;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-}
-
-.score-ticker .team-name.duke {
-  color: var(--duke-blue);
-  text-decoration: line-through;
-  text-decoration-color: var(--accent);
-}
-
-.score-ticker .team-score {
-  font-size: 2.5rem;
-  font-family: 'Archivo Black', sans-serif;
-  line-height: 1;
-  margin-top: 0.25rem;
-}
-
-.score-ticker .vs {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  font-weight: 400;
-}
-
-.score-ticker .game-status {
-  margin-top: 0.75rem;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.score-ticker .game-status.live {
-  color: var(--losing-red);
-  animation: pulse 1.5s infinite;
-}
-
-.score-ticker .no-game {
-  color: var(--text-secondary);
-  font-size: 0.85rem;
-  padding: 1rem 0;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
 /* ---- COACH K MOMENTS SECTION ---- */
 
 .moments-section {
@@ -230,7 +160,7 @@ nav {
 }
 
 .moments-section h2 {
-  font-family: 'Archivo Black', sans-serif;
+  font-family: 'Oswald', sans-serif;
   text-align: center;
   font-size: 1.3rem;
   text-transform: uppercase;
@@ -262,7 +192,7 @@ nav {
 }
 
 .moment-card .moment-year {
-  font-family: 'Archivo Black', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 0.7rem;
   color: var(--accent);
   text-transform: uppercase;
@@ -271,7 +201,7 @@ nav {
 }
 
 .moment-card .moment-title {
-  font-family: 'Archivo Black', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 1rem;
   margin-bottom: 0.5rem;
 }
@@ -290,7 +220,7 @@ nav {
   color: #fff;
   border: none;
   border-radius: 4px;
-  font-family: 'Archivo Black', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -299,38 +229,11 @@ nav {
 }
 
 .shuffle-btn:hover {
-  background: #e03030;
+  background: #1557b0;
 }
 
 .shuffle-btn:active {
   transform: scale(0.97);
-}
-
-/* ---- RAT IMAGE ---- */
-
-.rat-container {
-  text-align: center;
-  padding: 2rem 1rem;
-}
-
-.rat-img {
-  max-width: 350px;
-  width: 100%;
-  border-radius: 12px;
-  border: 3px solid var(--accent);
-  box-shadow: 0 0 30px var(--accent-glow);
-  transition: transform 0.3s;
-}
-
-.rat-img:hover {
-  transform: rotate(2deg) scale(1.02);
-}
-
-.rat-caption {
-  margin-top: 0.75rem;
-  color: var(--text-secondary);
-  font-size: 0.8rem;
-  font-style: italic;
 }
 
 /* ---- PAGE CONTENT (ABOUT / LOSSES) ---- */
@@ -342,7 +245,7 @@ nav {
 }
 
 .page-content h1 {
-  font-family: 'Archivo Black', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: clamp(1.5rem, 4vw, 2.2rem);
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -383,7 +286,7 @@ nav {
   color: var(--text-primary);
   padding: 0.5rem 1rem;
   border-radius: 4px;
-  font-family: 'Space Mono', monospace;
+  font-family: 'Oswald', sans-serif;
   font-size: 0.8rem;
 }
 
@@ -399,7 +302,7 @@ nav {
 
 .loss-counter {
   text-align: center;
-  font-family: 'Archivo Black', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 1.2rem;
   color: var(--accent);
   margin-bottom: 1.5rem;
@@ -429,7 +332,7 @@ nav {
 }
 
 .losses-table th {
-  font-family: 'Archivo Black', sans-serif;
+  font-family: 'Oswald', sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 0.7rem;
@@ -462,7 +365,7 @@ nav {
 }
 
 .losses-table tbody tr:hover {
-  background: rgba(255, 68, 68, 0.05);
+  background: rgba(26, 115, 232, 0.05);
 }
 
 .losses-table tbody tr:nth-child(even) {
@@ -470,12 +373,77 @@ nav {
 }
 
 .losses-table tbody tr:nth-child(even):hover {
-  background: rgba(255, 68, 68, 0.05);
+  background: rgba(26, 115, 232, 0.05);
 }
 
 .losses-table .upset {
   color: var(--winning-green);
   font-weight: 700;
+}
+
+/* ---- STORE ---- */
+
+.store-disclaimer {
+  background: var(--bg-card);
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.store-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.store-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.store-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.store-card h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.store-card .shop-btn {
+  display: inline-block;
+  padding: 0.6rem 1.8rem;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: background 0.2s;
+}
+
+.store-card .shop-btn:hover {
+  background: #1557b0;
 }
 
 /* ---- FOOTER ---- */
@@ -535,14 +503,6 @@ footer a:hover {
     max-width: 280px;
   }
 
-  .score-ticker .matchup {
-    gap: 1rem;
-  }
-
-  .score-ticker .team-score {
-    font-size: 2rem;
-  }
-
   .moment-card {
     padding: 1.25rem;
   }
@@ -571,9 +531,9 @@ footer a:hover {
 }
 
 @keyframes partyBg {
-  0% { background-color: #cc0000; }
+  0% { background-color: #1a73e8; }
   25% { background-color: #003087; }
   50% { background-color: #0a0a0a; }
-  75% { background-color: #cc0000; }
+  75% { background-color: #1a73e8; }
   100% { background-color: #0a0a0a; }
 }
