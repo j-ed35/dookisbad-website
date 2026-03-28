@@ -7,10 +7,11 @@
 const DUKE_SEED_FTA = 68;
 const OPP_SEED_FTA  = 24;
 
-// Live polling window (Eastern Time, 24-hour clock)
-// Update these for each game day as needed
-const POLL_START_HOUR_ET = 17;  // 5:00 PM ET
-const POLL_END_HOUR_ET   = 20;  // 8:00 PM ET
+// Live polling window — set to the specific game date and hour range (ET, 24-hour clock)
+// Update POLL_DATE to 'YYYY-MM-DD' for the next game day, or '' to poll any day
+const POLL_DATE          = '2026-03-29'; // e.g. '2026-03-29'; set '' to match any date
+const POLL_START_HOUR_ET = 17;           // 5:00 PM ET
+const POLL_END_HOUR_ET   = 20;           // 8:00 PM ET
 
 const POLL_INTERVAL_MS = 60000; // 60 seconds
 
@@ -32,9 +33,15 @@ function getEtHour() {
   return parseInt(etStr, 10);
 }
 
+function getTodayET() {
+  // Returns today's date string as 'YYYY-MM-DD' in Eastern Time
+  return new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
+}
+
 function isInPollingWindow() {
   const h = getEtHour();
-  return h >= POLL_START_HOUR_ET && h < POLL_END_HOUR_ET;
+  const dateMatch = !POLL_DATE || getTodayET() === POLL_DATE;
+  return dateMatch && h >= POLL_START_HOUR_ET && h < POLL_END_HOUR_ET;
 }
 
 function setStatus(text) {
@@ -182,7 +189,7 @@ async function fetchLiveFTA() {
 
   } catch (err) {
     console.error('[FTA Tracker]', err);
-    setStatus('Could not load live data.');
+    setStatus('No Game Active.');
   }
 }
 
@@ -194,7 +201,6 @@ function startPolling() {
   pollTimer = setInterval(() => {
     if (!isInPollingWindow()) {
       stopPolling();
-      setStatus('Outside polling window. Showing seed totals.');
       return;
     }
     fetchLiveFTA();
@@ -222,13 +228,6 @@ function initFTA() {
   const hour = getEtHour();
   if (isInPollingWindow()) {
     startPolling();
-  } else if (hour < POLL_START_HOUR_ET) {
-    const startLabel = POLL_START_HOUR_ET > 12
-      ? `${POLL_START_HOUR_ET - 12}pm`
-      : `${POLL_START_HOUR_ET}am`;
-    setStatus(`Live updates start at ${startLabel} ET.`);
-  } else {
-    setStatus('Showing seed totals.');
   }
 }
 
