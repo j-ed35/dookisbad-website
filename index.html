@@ -16,7 +16,6 @@
       <a href="index.html">
         <img src="assets/dookisbad.png" alt="dookisbad.com logo" class="nav-logo">
       </a>
-      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
       <ul class="nav-links">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="losses.html">Losses</a></li>
@@ -36,6 +35,25 @@
   <!-- darth k MOMENTS -->
   <section class="moments-section">
     <h2>Why Dook Is Bad</h2>
+
+    <!-- FREE THROW TRACKER -->
+    <div class="fta-section">
+      <h3 class="fta-title">2026 NCAA Tourney &mdash; Free Throws Attempted</h3>
+      <div class="fta-tracker">
+        <div class="fta-col">
+          <div class="fta-label">Dook</div>
+          <div class="fta-number" id="ftaDook">68</div>
+        </div>
+        <div class="fta-divider"></div>
+        <div class="fta-col">
+          <div class="fta-label">Opponents</div>
+          <div class="fta-number" id="ftaOpponents">24</div>
+        </div>
+      </div>
+      <div class="fta-status" id="ftaStatus"></div>
+      <button class="fta-refresh-btn" onclick="refreshFTA()">&#8635; Refresh</button>
+    </div>
+
     <button class="shuffle-btn" onclick="shuffleMoments()">Shuffle</button>
     <div id="momentsContainer"></div>
   </section>
@@ -47,6 +65,7 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script src="js/fta-tracker.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>

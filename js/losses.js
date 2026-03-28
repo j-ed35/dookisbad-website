@@ -13,20 +13,47 @@ let currentSort = { col: 0, asc: false }; // Default: newest first
 let filteredData = [...DUKE_LOSSES];
 
 function init() {
-  populateSeasonFilter();
+  populateSeasonFilter('');
   renderTable(DUKE_LOSSES);
   updateCount(DUKE_LOSSES.length);
 }
 
-function populateSeasonFilter() {
+// Populate season dropdown — optionally locked to a coach's seasons
+function populateSeasonFilter(coachFilter) {
   const select = document.getElementById('seasonFilter');
-  const seasons = [...new Set(DUKE_LOSSES.map(r => r[1]))].sort().reverse();
+  const currentValue = select.value;
+
+  // Remove all options except the first "All Seasons" placeholder
+  while (select.options.length > 1) {
+    select.remove(1);
+  }
+
+  let seasons = [...new Set(DUKE_LOSSES.map(r => r[1]))].sort().reverse();
+
+  if (coachFilter === 'darth k') {
+    seasons = seasons.filter(s => !SCHEYER_SEASONS.includes(s));
+  } else if (coachFilter === 'Scheyer') {
+    seasons = seasons.filter(s => SCHEYER_SEASONS.includes(s));
+  }
+
   seasons.forEach(s => {
     const opt = document.createElement('option');
     opt.value = s;
     opt.textContent = s;
     select.appendChild(opt);
   });
+
+  // Restore previous selection only if it's still in the filtered list
+  if (seasons.includes(currentValue)) {
+    select.value = currentValue;
+  }
+}
+
+// Called when coach filter changes — locks season dropdown then filters
+function onCoachChange() {
+  const coach = document.getElementById('coachFilter').value;
+  populateSeasonFilter(coach);
+  filterLosses();
 }
 
 function renderTable(data) {
