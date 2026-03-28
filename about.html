@@ -16,7 +16,6 @@
       <a href="index.html">
         <img src="assets/dookisbad.png" alt="dookisbad.com logo" class="nav-logo">
       </a>
-      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="losses.html">Losses</a></li>
@@ -33,6 +32,18 @@
     <p>
       DookIsBad is a non-profit organization operating for the public good, bravely sharing vital truths in the face of institutional censorship and the relentless evil of Duke basketball. We are not UNC fans pushing a local rivalry agenda; our strictly not-for-profit mission is fueled entirely by a pure, unadulterated disdain for the Blue Devils. We provide this charitable public service to unite a marginalized, silenced community of fans. As a dedicated non-profit entity, our only bottom line is standing together to hold them accountable for the betterment of the sporting world. We hate Duke, and support the troops.
     </p>
+
+    <h2>Contact</h2>
+
+    <p>Got something? A missing loss, a correction, a burning hatred that needs sharing? We want to hear it.</p>
+
+    <form id="contactForm" class="contact-form" novalidate>
+      <input type="text" name="name" placeholder="Name" required autocomplete="name">
+      <input type="email" name="email" placeholder="Email" required autocomplete="email">
+      <textarea name="message" placeholder="What's on your mind?" rows="5" required></textarea>
+      <button type="submit">Send it</button>
+    </form>
+    <p id="contactMsg" class="contact-msg"></p>
   </section>
 
   <!-- FOOTER -->
@@ -43,6 +54,47 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('button[type="submit"]');
+      const msg = document.getElementById('contactMsg');
+
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      msg.textContent = '';
+      msg.className = 'contact-msg';
+
+      const payload = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        message: form.message.value.trim()
+      };
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const json = await res.json();
+        if (json.ok) {
+          msg.textContent = 'Sent. We appreciate it.';
+          msg.className = 'contact-msg success';
+          form.reset();
+        } else {
+          msg.textContent = json.error || 'Something went wrong. Try again.';
+          msg.className = 'contact-msg error';
+        }
+      } catch (_) {
+        msg.textContent = 'Could not send. Check your connection and try again.';
+        msg.className = 'contact-msg error';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Send it';
+      }
+    });
   </script>
 </body>
 </html>

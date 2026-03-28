@@ -42,7 +42,7 @@ nav {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(10, 10, 10, 0.92);
+  background: rgba(10, 10, 10, 0.97);
   backdrop-filter: blur(12px);
   border-bottom: 2px solid var(--accent);
   padding: 0 2rem;
@@ -53,12 +53,13 @@ nav {
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 64px;
+  gap: 1.5rem;
+  height: 56px;
 }
 
 .nav-logo {
-  height: 48px;
+  height: 40px;
+  flex-shrink: 0;
   transition: transform 0.2s;
 }
 
@@ -69,34 +70,50 @@ nav {
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 0.25rem;
+  gap: 0;
+  flex: 1;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav-links::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-links li {
+  flex-shrink: 0;
 }
 
 .nav-links a {
-  color: #ffffff;
+  display: block;
+  color: #aaaaaa;
   text-decoration: none;
   font-family: 'Oswald', sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background 0.2s, color 0.2s;
+  padding: 0 1.1rem;
+  height: 56px;
+  line-height: 56px;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
 }
 
-.nav-links a:hover,
+.nav-links a:hover {
+  color: #ffffff;
+  border-bottom-color: rgba(26, 115, 232, 0.5);
+}
+
 .nav-links a.active {
-  background: var(--accent);
-  color: #fff;
+  color: #ffffff;
+  border-bottom-color: var(--accent);
 }
 
+/* hamburger hidden — nav is always horizontal */
 .nav-toggle {
   display: none;
-  background: none;
-  border: none;
-  color: #ffffff;
-  font-size: 1.5rem;
-  cursor: pointer;
 }
 
 /* ---- HERO / HEADER ---- */
@@ -133,6 +150,9 @@ nav {
          drop-shadow(0 0 60px rgba(26, 115, 232, 0.6))
          drop-shadow(0 0 100px rgba(26, 115, 232, 0.4))
          drop-shadow(0 0 160px rgba(26, 115, 232, 0.25));
+  /* Force own composite layer so the glow doesn't degrade on mobile scroll */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .hero h1 {
@@ -152,8 +172,8 @@ nav {
 }
 
 @keyframes floatIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(20px) translateZ(0); }
+  to { opacity: 1; transform: translateY(0) translateZ(0); }
 }
 
 /* ---- darth k MOMENTS SECTION ---- */
@@ -164,7 +184,7 @@ nav {
   padding: 2rem 1.5rem 4rem;
 }
 
-.moments-section h2 {
+.moments-section > h2 {
   font-family: 'Oswald', sans-serif;
   text-align: center;
   font-size: 1.3rem;
@@ -179,9 +199,9 @@ nav {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 1.5rem 2rem;
+  padding: 1.25rem 1.5rem;
   margin-bottom: 1rem;
-  transition: border-color 0.2s, transform 0.2s;
+  transition: border-color 0.2s, transform 0.2s, background 0.15s;
   cursor: pointer;
   text-decoration: none;
   color: var(--text-primary);
@@ -195,6 +215,12 @@ nav {
 .moment-card:hover {
   border-color: var(--accent);
   transform: translateX(4px);
+  background: #c8c8c8;
+}
+
+.moment-card:active {
+  background: #bdbdbd;
+  transform: translateX(2px);
 }
 
 .moment-img {
@@ -205,14 +231,34 @@ nav {
   margin-bottom: 0.75rem;
 }
 
+.moment-card-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
 .moment-card .moment-title {
   font-family: 'Oswald', sans-serif;
   font-size: 1rem;
+  flex: 1;
+}
+
+.moment-arrow {
+  font-size: 1.1rem;
+  color: var(--accent);
+  flex-shrink: 0;
+  transition: transform 0.2s;
+  line-height: 1;
+}
+
+.moment-card:hover .moment-arrow {
+  transform: translateX(4px);
 }
 
 .shuffle-btn {
   display: block;
-  margin: 2rem auto 0;
+  margin: 0 auto 1.75rem;
   padding: 0.75rem 2rem;
   background: var(--accent);
   color: #fff;
@@ -234,6 +280,93 @@ nav {
   transform: scale(0.97);
 }
 
+/* ---- FTA TRACKER ---- */
+
+.fta-section {
+  text-align: center;
+  padding: 2rem 0 2.25rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin: 1.75rem 0 2rem;
+}
+
+.fta-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 1.75rem;
+}
+
+.fta-tracker {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5rem;
+}
+
+.fta-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fta-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+
+.fta-number {
+  font-family: 'Oswald', sans-serif;
+  font-size: 4.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.fta-divider {
+  width: 1px;
+  height: 5rem;
+  background: var(--border);
+  margin-top: 1.5rem;
+  align-self: flex-start;
+}
+
+.fta-status {
+  font-size: 0.7rem;
+  color: #666;
+  margin-top: 1.25rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  min-height: 1em;
+}
+
+.fta-refresh-btn {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.4rem 1.2rem;
+  background: none;
+  border: 1px solid #aaa;
+  color: #555;
+  border-radius: 4px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.fta-refresh-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 /* ---- PAGE CONTENT (ABOUT / LOSSES) ---- */
 
 .page-content {
@@ -252,6 +385,17 @@ nav {
   text-align: center;
 }
 
+.page-content h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
 .page-content p {
   font-size: 0.95rem;
   color: var(--text-secondary);
@@ -266,6 +410,82 @@ nav {
   color: var(--accent);
   font-weight: 700;
 }
+
+/* ---- CONTACT FORM ---- */
+
+.contact-form {
+  max-width: 520px;
+  margin: 1.5rem auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #888;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-form button[type="submit"] {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: background 0.2s;
+  align-self: flex-start;
+}
+
+.contact-form button[type="submit"]:hover {
+  background: #1557b0;
+}
+
+.contact-form button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.contact-msg {
+  text-align: center;
+  font-size: 0.85rem;
+  margin-top: 0.75rem;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 1.2em;
+}
+
+.contact-msg.success { color: var(--winning-green); }
+.contact-msg.error   { color: var(--losing-red); }
 
 /* ---- LOSSES TABLE ---- */
 
@@ -477,32 +697,24 @@ footer a:hover {
 
 @media (max-width: 640px) {
   nav {
-    padding: 0 1rem;
+    padding: 0 0.75rem;
   }
 
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 64px;
-    left: 0;
-    right: 0;
-    background: rgba(10, 10, 10, 0.97);
-    border-bottom: 2px solid var(--accent);
-    padding: 1rem;
+  .nav-inner {
+    gap: 0.75rem;
+    height: 52px;
   }
 
-  .nav-links.open {
-    display: flex;
+  .nav-logo {
+    height: 34px;
   }
 
   .nav-links a {
-    padding: 0.75rem 1rem;
-    text-align: center;
-  }
-
-  .nav-toggle {
-    display: block;
+    font-size: 0.72rem;
+    padding: 0 0.65rem;
+    letter-spacing: 1px;
+    height: 52px;
+    line-height: 52px;
   }
 
   .hero-logo {
@@ -510,7 +722,15 @@ footer a:hover {
   }
 
   .moment-card {
-    padding: 1.25rem;
+    padding: 1rem 1.25rem;
+  }
+
+  .fta-tracker {
+    gap: 3rem;
+  }
+
+  .fta-number {
+    font-size: 3.5rem;
   }
 
   .losses-table {

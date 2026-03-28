@@ -16,7 +16,6 @@
       <a href="index.html">
         <img src="assets/dookisbad.png" alt="dookisbad.com logo" class="nav-logo">
       </a>
-      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="losses.html" class="active">Losses</a></li>
@@ -29,7 +28,7 @@
   <!-- LOSSES CONTENT -->
   <section class="page-content">
     <h1>The Duke Loss Archive</h1>
-    <p class="text-center">Every single Duke loss since the hiring of darth krzyzewski (1980&ndash;2022).</p>
+    <p class="text-center">Every Duke loss since 1980.</p>
 
     <div class="loss-counter">
       Total Duke Losses
@@ -47,7 +46,7 @@
         <option value="acc">ACC Games</option>
         <option value="non-conf">Non-Conference</option>
       </select>
-      <select id="coachFilter" onchange="filterLosses()">
+      <select id="coachFilter" onchange="onCoachChange()">
         <option value="">All Coaches</option>
         <option value="darth k">darth k</option>
         <option value="Scheyer">Jon Scheyer</option>
@@ -73,8 +72,7 @@
     </div>
 
     <p class="text-center mt-3" style="font-size: 0.75rem;">
-      Data compiled by hand with love and dedication to the cause.<br>
-      If you find a missing loss, please let us know. Every one counts.
+      If you find a missing loss, please let us know <a href="about.html">here</a>. Every one counts.
     </p>
   </section>
 

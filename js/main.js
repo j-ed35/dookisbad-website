@@ -72,7 +72,10 @@ function shuffleMoments() {
   container.innerHTML = selected.map(m => `
     <a href="${m.url}" target="_blank" rel="noopener noreferrer" class="moment-card">
       ${m.img ? `<img src="${m.img}" alt="" class="moment-img">` : ''}
-      <div class="moment-title">${m.title}</div>
+      <div class="moment-card-body">
+        <div class="moment-title">${m.title}</div>
+        <span class="moment-arrow">&#8594;</span>
+      </div>
     </a>
   `).join('');
 }
