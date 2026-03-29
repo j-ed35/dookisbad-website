@@ -15,8 +15,8 @@ const POLL_END_HOUR_ET   = 24;           // midnight ET (covers late games)
 
 const POLL_INTERVAL_MS = 60000; // 60 seconds
 
-// NCAA API base — uses the henrygd/ncaa-api public proxy
-const NCAA_API_BASE = 'https://ncaa-api.henrygd.me';
+// ESPN public API — no key required, works from browser
+const ESPN_BASE = 'https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball';
 // ----------------------------------------
 
 let pollTimer = null;
@@ -56,47 +56,32 @@ function setNumbers(dook, opp) {
   if (oEl) oEl.textContent = opp;
 }
 
-// ---- NCAA API HELPERS ----
+// ---- ESPN API HELPERS ----
 
 async function fetchScoreboard() {
-  const etDate = getTodayET(); // 'YYYY-MM-DD' in Eastern Time
-  const [y, m, d] = etDate.split('-');
-  const url = `${NCAA_API_BASE}/scoreboard/basketball-men/d1/${y}/${m}/${d}`;
-  const res = await fetch(url);
+  const res = await fetch(`${ESPN_BASE}/scoreboard`);
   if (!res.ok) throw new Error(`Scoreboard HTTP ${res.status}`);
   return res.json();
 }
 
-async function fetchBoxscore(gameUrl) {
-  // gameUrl is typically a relative path like /game/6277577/boxscore
-  // The ncaa-api may surface it as a URL string on the game object
-  const full = gameUrl.startsWith('http')
-    ? gameUrl
-    : `${NCAA_API_BASE}${gameUrl.startsWith('/') ? '' : '/'}${gameUrl}`;
-  const res = await fetch(full);
-  if (!res.ok) throw new Error(`Boxscore HTTP ${res.status}`);
+async function fetchSummary(eventId) {
+  const res = await fetch(`${ESPN_BASE}/summary?event=${eventId}`);
+  if (!res.ok) throw new Error(`Summary HTTP ${res.status}`);
   return res.json();
 }
 
-function extractFTAFromTeam(team) {
-  // Try common stat shapes returned by ncaa-api / NCAA JSON
-  const stats = team.stats || team.totals || team.statistics || {};
+function isDukeTeam(team) {
+  const name = (team?.displayName || team?.abbreviation || team?.name || '').toLowerCase();
+  return name.includes('duke');
+}
 
-  // Direct key lookup
-  for (const key of ['fta', 'FTA', 'ftAttempts', 'freeThrowAttempts']) {
-    if (stats[key] !== undefined) return parseInt(stats[key], 10) || 0;
-  }
-
-  // Iterate a statList array (some ncaa-api shapes)
-  const list = stats.statList || team.statList || [];
-  for (const s of list) {
-    const label = (s.label || s.name || s.stat || '').toLowerCase();
-    if (label.includes('free throw') && label.includes('attempt')) {
-      return parseInt(s.value || s.total || 0, 10) || 0;
-    }
-  }
-
-  return 0;
+function extractFTAFromESPN(teamStats) {
+  // teamStats.statistics is an array of { name, displayValue, label } objects
+  const stats = teamStats.statistics || [];
+  const ftaStat = stats.find(s =>
+    s.name === 'freeThrowsAttempted' || s.label === 'FTA'
+  );
+  return parseInt(ftaStat?.displayValue || '0', 10) || 0;
 }
 
 // ---- MAIN FETCH ----
@@ -105,69 +90,48 @@ async function fetchLiveFTA() {
   setStatus('Checking for live games\u2026');
   try {
     const board = await fetchScoreboard();
-    const games = board.games || [];
+    const events = board.events || [];
 
     // Find a Duke game
-    let dukeGame = null;
-    let dukeIsHome = false;
+    let dukeEvent = null;
 
-    for (const entry of games) {
-      const g = entry.game || entry;
-      const home = (g.home?.names?.full || g.home?.name || '').toLowerCase();
-      const away = (g.away?.names?.full || g.away?.name || '').toLowerCase();
-      if (home.includes('duke') || away.includes('duke')) {
-        dukeGame = g;
-        dukeIsHome = home.includes('duke');
+    for (const event of events) {
+      const competitors = event.competitions?.[0]?.competitors || [];
+      const hasDuke = competitors.some(c => isDukeTeam(c.team));
+      if (hasDuke) {
+        dukeEvent = event;
         break;
       }
     }
 
-    if (!dukeGame) {
+    if (!dukeEvent) {
       setStatus('No Duke game found today.');
       return;
     }
 
-    const state = (dukeGame.gameState || dukeGame.status || '').toLowerCase();
-    const isLive  = state === 'live' || state === 'in progress' || state === 'inprogress';
-    const isFinal = state === 'final' || state === 'final/ot';
+    const statusName = dukeEvent.status?.type?.name || '';
+    const isLive  = statusName === 'STATUS_IN_PROGRESS' || statusName === 'STATUS_HALFTIME';
+    const isFinal = statusName === 'STATUS_FINAL' || statusName === 'STATUS_FINAL_OT';
 
     if (!isLive && !isFinal) {
-      setStatus(`Duke game status: ${state || 'not started yet'}.`);
+      const clock = dukeEvent.status?.displayClock || '';
+      const period = dukeEvent.status?.period || '';
+      setStatus(`Duke game not yet started${clock ? ` — ${clock}` : ''}.`);
       return;
     }
 
-    // Grab a URL we can use to request the boxscore
-    const gameRef = dukeGame.url || dukeGame.gameID || dukeGame.id;
-    if (!gameRef) {
-      setStatus(isLive ? 'Live game found \u2014 FTA unavailable.' : 'Final \u2014 FTA unavailable.');
-      return;
-    }
-
-    // Try to build the boxscore URL
-    // ncaa-api often exposes /game/{id}/boxscore
-    const boxUrl = typeof gameRef === 'string' && gameRef.includes('boxscore')
-      ? gameRef
-      : `/game/${gameRef}/boxscore`;
-
-    const box = await fetchBoxscore(boxUrl);
-
-    // Extract team stats — shape varies
-    const teams = box.teams
-      || (box.game && box.game.teams)
-      || (box.gameState && box.gameState.teams)
-      || [];
+    // Fetch the box score summary for FTA
+    const summary = await fetchSummary(dukeEvent.id);
+    const boxTeams = summary.boxscore?.teams || [];
 
     let dukeFTA = 0;
     let oppFTA  = 0;
 
-    for (const team of teams) {
-      const name = (team.name || team.fullName || team.nameShort || '').toLowerCase();
-      const isDuke = name.includes('duke');
-      const fta = extractFTAFromTeam(team);
-      if (isDuke) {
-        dukeFTA = fta;
+    for (const teamStats of boxTeams) {
+      if (isDukeTeam(teamStats.team)) {
+        dukeFTA = extractFTAFromESPN(teamStats);
       } else {
-        oppFTA = fta;
+        oppFTA = extractFTAFromESPN(teamStats);
       }
     }
 
@@ -182,12 +146,12 @@ async function fetchLiveFTA() {
       setStatus(`${label} \u2014 updated ${timeStr} ET`);
     } else {
       const label = isLive ? 'Live game found' : 'Game final';
-      setStatus(`${label} \u2014 FTA not available from API.`);
+      setStatus(`${label} \u2014 FTA not yet available.`);
     }
 
   } catch (err) {
     console.error('[FTA Tracker]', err);
-    setStatus('No Game Active.');
+    setStatus(`Error: ${err.message}`);
   }
 }
 
@@ -223,7 +187,6 @@ function initFTA() {
   // Always show seed totals as the baseline
   setNumbers(DUKE_SEED_FTA, OPP_SEED_FTA);
 
-  const hour = getEtHour();
   if (isInPollingWindow()) {
     startPolling();
   }
