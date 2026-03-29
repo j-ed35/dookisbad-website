@@ -78,10 +78,26 @@ function isDukeTeam(team) {
 function extractFTAFromESPN(teamStats) {
   // teamStats.statistics is an array of { name, displayValue, label } objects
   const stats = teamStats.statistics || [];
+
+  // Case 1: separate freeThrowsAttempted stat or FTA label
   const ftaStat = stats.find(s =>
     s.name === 'freeThrowsAttempted' || s.label === 'FTA'
   );
-  return parseInt(ftaStat?.displayValue || '0', 10) || 0;
+  if (ftaStat) return parseInt(ftaStat.displayValue || '0', 10) || 0;
+
+  // Case 2: ESPN college basketball often combines FT as "made-attempted" string
+  // e.g. { name: "freeThrowsMade-freeThrowsAttempted", displayValue: "10-12", label: "FT" }
+  const ftCombined = stats.find(s =>
+    s.label === 'FT' || (s.name || '').toLowerCase().includes('freethrow')
+  );
+  if (ftCombined) {
+    const parts = (ftCombined.displayValue || '').split('-');
+    if (parts.length === 2) return parseInt(parts[1], 10) || 0;
+    return parseInt(parts[0], 10) || 0;
+  }
+
+  console.warn('[FTA Tracker] Could not find FT stat in:', stats);
+  return 0;
 }
 
 // ---- MAIN FETCH ----
