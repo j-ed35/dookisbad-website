@@ -11,7 +11,7 @@ const OPP_SEED_FTA  = 24;
 // Update POLL_DATE to 'YYYY-MM-DD' for the next game day, or '' to poll any day
 const POLL_DATE          = '2026-03-29'; // e.g. '2026-03-29'; set '' to match any date
 const POLL_START_HOUR_ET = 17;           // 5:00 PM ET
-const POLL_END_HOUR_ET   = 20;           // 8:00 PM ET
+const POLL_END_HOUR_ET   = 24;           // midnight ET (covers late games)
 
 const POLL_INTERVAL_MS = 60000; // 60 seconds
 
@@ -59,10 +59,8 @@ function setNumbers(dook, opp) {
 // ---- NCAA API HELPERS ----
 
 async function fetchScoreboard() {
-  const now = new Date();
-  const y = now.getFullYear();
-  const m = String(now.getMonth() + 1).padStart(2, '0');
-  const d = String(now.getDate()).padStart(2, '0');
+  const etDate = getTodayET(); // 'YYYY-MM-DD' in Eastern Time
+  const [y, m, d] = etDate.split('-');
   const url = `${NCAA_API_BASE}/scoreboard/basketball-men/d1/${y}/${m}/${d}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Scoreboard HTTP ${res.status}`);
